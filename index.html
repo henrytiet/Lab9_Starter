@@ -110,11 +110,6 @@
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
     // Start your code here
     // You may move this JS to another file if you wish
-
-    window.TrackJS && TrackJS.install({ 
-      token: "66ad8cf385194eadb522c1f5b6f022b9"
-      // for more configuration options, see https://docs.trackjs.com
-    });
     class ConstError extends Error {
       constructor(message) {
         super(message);
