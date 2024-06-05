@@ -87,6 +87,14 @@
     </section>
   </main>
 
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "66ad8cf385194eadb522c1f5b6f022b9"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+  </script>
+                        
   <script>
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
@@ -99,9 +107,81 @@
     });
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
-
     // Start your code here
     // You may move this JS to another file if you wish
+
+    window.TrackJS && TrackJS.install({ 
+      token: "66ad8cf385194eadb522c1f5b6f022b9"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+    class ConstError extends Error {
+      constructor(message) {
+        super(message);
+        this.name = "ConstError";
+      }
+    }
+    errorBtns[0].addEventListener("click", () => {
+      console.log('Console Log Demo');
+    });
+    errorBtns[1].addEventListener('click', () => {
+      console.error('Console Error Demo');
+    });
+    errorBtns[2].addEventListener('click', () => {
+      console.count('Count');
+    });
+    errorBtns[3].addEventListener('click', () => {
+      console.warn('Console Warn Button');
+    });
+    errorBtns[4].addEventListener('click', () => {
+      console.assert(2 == 3, "The number 2 does not equal 3");
+    });
+    errorBtns[5].addEventListener('click', () => {
+      console.clear();
+    });
+    errorBtns[6].addEventListener('click', () => {
+      console.dir(errorBtns[6]);
+    });
+    errorBtns[7].addEventListener('click', () => {
+      console.dirxml(errorBtns[6]);
+    });
+    errorBtns[8].addEventListener('click', () => {
+      console.group();
+    });
+    errorBtns[9].addEventListener('click', () => {
+      console.groupEnd();
+    });
+    errorBtns[10].addEventListener('click', () => {
+      console.table([{Class:'Software Engineering', Section : '110'}, {Class: 'Intro to Programming', Section: '11'}]);
+    });
+    errorBtns[11].addEventListener('click', () => {
+      console.time();
+    });
+    errorBtns[12].addEventListener('click', () => {
+      console.timeEnd();
+    });
+    errorBtns[13].addEventListener('click', () => {
+      console.trace();
+    });
+    errorBtns[14].addEventListener('click', () => {
+      try {
+        const toChange = 25;
+        toChange = 28;
+      }
+      catch (err) {
+        console.error(err);
+        throw new ConstError("Constant reassignment not possible");
+      }
+      finally {
+        console.log('Final state reached');
+      }
+    });
+
+    window.onerror = function(message, source, lineno, colno, error) {
+      console.log('Global error triggered:', message)
+      if(window.TrackJS) {
+        TrackJS.track(message);
+      }
+    }
   </script>
 </body>
 
